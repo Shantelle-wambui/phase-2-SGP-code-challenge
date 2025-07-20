@@ -1,5 +1,5 @@
 import React from "react";
-import GoalCard from "./GoalCard"; //import individual goal card component
+import GoalCard from "./GoalCard"
 
 function GoalList({goals, onUpdateGoal, onDeleteGoal }) {
     return (

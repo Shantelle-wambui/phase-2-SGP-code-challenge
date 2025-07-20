@@ -44,9 +44,16 @@ function GoalCard ({goal, onUpdateGoal,onDeleteGoal}) {
             <p><strong>Category:</strong> {category}</p>
             <p><strong>Target:</strong> Ksh {targetAmount}</p>
             <p><strong>Saved:</strong> Ksh {savedAmount}</p>
-            <p><strong>Progress:</strong> {progressPercent}%</p> {/* Display progress */}
             <p><strong>Deadline:</strong> {deadline}</p>
 
+            {/* progress bar and label */}
+        <div className="progress-bar-container">
+        <div
+          className="progress-bar-fill"
+          style={{ width: `${progressPercent}%` }}
+        ></div>
+        </div>
+        <p><strong>Progress:</strong> {progressPercent}%</p>
              {!isCompleted && <p><strong>{warning}</strong></p>}
 
               {!isCompleted && (

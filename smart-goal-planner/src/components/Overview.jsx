@@ -1,49 +1,49 @@
 import React from "react";
 
-function Overview({goals}) {
+function Overview({ goals }) {
+  const totalGoals = goals.length; //total number of goals
 
-    const totalGoals = goals.length; //total number of goals
+  const totalSaved = goals.reduce((sum, goal) => sum + goal.saved, 0);
+  //sum of saved amounts across all goals
 
-    const totalSaved = goals.reduce((sum, goal) => sum + goal.saved, 0); 
-    //this is the total saved amount across all goals
+  const completedGoals = goals.filter(goal => goal.saved >= goal.target).length;
+  //number of completed goals
 
+  const now = new Date(); //current time
 
-    const now = new Date(); //this gets the current date and time
-
-    const deadlineWarnings = goals.filter((goal) => {
+  const deadlineWarnings = goals.filter(goal => {
     const deadline = new Date(goal.deadline);
     const timeDiff = deadline - now;
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // convert ms to days
-    return daysLeft <= 7;
+
+    return goal.saved < goal.target && (daysLeft <= 30 || daysLeft < 0);
+    // includes goals that are not complete and have deadlines within 30 days or missed
   });
-  //then i filter all goals with deadlines within the next 7 days or already missed
- return (
+
+  return (
     <div className="overview">
       <h2>Overview</h2>
-      <p>Total Goals: {totalGoals}</p>
-      {/* Displays total number of goals */}
-   
-      <p>Total Saved: KES {totalSaved.toLocaleString()}</p>
-       {/* Display total saved amount in Kenyan Shillings */}
 
-      {deadlineWarnings.length > 0 && ( 
-        
+      <p><strong>Total Goals:</strong> {totalGoals}</p>
+      <p><strong>Goals Completed:</strong> {completedGoals}</p>
+      <p><strong>Total Saved:</strong> KES {totalSaved.toLocaleString()}</p>
+
+      {deadlineWarnings.length > 0 && (
         <div>
-          <h4> Deadlines</h4>
+          <h4>Deadlines</h4>
           <ul>
             {deadlineWarnings.map((goal) => {
               const daysLeft = Math.ceil((new Date(goal.deadline) - now) / (1000 * 60 * 60 * 24));
-              
+
               const label =
                 daysLeft < 0
-                  ? `❌ Deadline Missed by ${Math.abs(daysLeft)} day(s)`
-                  : `⏳ ${daysLeft} day(s) left`;
-              // Determine the appropriate label based on days left
+                  ? `❌ Overdue by ${Math.abs(daysLeft)} day(s)`
+                  : `⏳ Only ${daysLeft} day(s) left`;
+                  //label for deadline status
 
               return (
                 <li key={goal.id}>
-                  {goal.title} — {label}
-                    {/* Show the goal title and deadline status */}
+                  <strong>{goal.title}</strong> — {label}
                 </li>
               );
             })}

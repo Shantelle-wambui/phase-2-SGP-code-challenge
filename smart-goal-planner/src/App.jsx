@@ -68,7 +68,7 @@ function App () {
         onUpdateGoal={handleUpdateGoal}
         onDeleteGoal={handleDeleteGoal}
       />
-      {/* Render the list of all current goals */}
+      {/* render the list of all current goals */}
 
     </div>
   )

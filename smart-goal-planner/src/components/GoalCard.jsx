@@ -60,7 +60,7 @@ function GoalCard ({goal, onUpdateGoal,onDeleteGoal}) {
              <DepositForm goal={goal} onUpdateGoal={onUpdateGoal} />
               )}
 
-              {/* Show DepositForm only if goal is not yet complete */}
+              {/* show DepositForm only if goal is not yet complete */}
               <button onClick={handleDelete}>Delete Goal</button>  
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import GoalList from "./components/GoalList";
+import DepositForm from "./components/DepositForm";
 import GoalForm from "./components/GoalForm"
+import Overview from "./components/Overview";
 
 function App () {
   const[goals, setGoals] = useState([]); //then i useState to keep track of all the saving goals the user adds
@@ -26,6 +28,31 @@ function App () {
     const updatedGoals = goals.filter((goal) => goal.id !== deletedGoalId);
     setGoals(updatedGoals);
   }
+  function handleDeposit(goalId, depositAmount) {
+  const goalToUpdate = goals.find(goal => goal.id === goalId);
+  //here first i find the goal that matches the id
+
+  if (!goalToUpdate) return;
+  //if there is no goal found ,exit early
+
+  const updatedSavedAmount = goalToUpdate.savedAmount + depositAmount;
+  //then calculate the new saved amount by adding the deposit to the currene
+
+  fetch(`http://localhost:3000/goals/${goalId}`, { 
+    //i then sena a patch request to the json server to update the goal's saved amount
+    method: "PATCH", //only update part of the goal
+    headers: {
+      "Content-Type": "application/json", //here sending json data
+    },
+    body: JSON.stringify({ saved: updatedSavedAmount }), //only update the saved amount
+  })
+    .then((res) => res.json()) //converts the response to json
+    .then((updatedGoal) => {
+      handleUpdateGoal(updatedGoal);
+      //then after updating  on the server reflect the change in local state
+    });
+}
+
 
   return(
     <div className="App">
@@ -34,6 +61,8 @@ function App () {
       <GoalForm onAddGoal={handleAddGoal} />
       {/*this handleAddGoal function is passed as a prop to allow the form to send new data to app*/}
 
+      <DepositForm goals= {goals} onDeposit={handleDeposit} />
+      <Overview goals={goals} />
       <GoalList
         goals={goals}
         onUpdateGoal={handleUpdateGoal}

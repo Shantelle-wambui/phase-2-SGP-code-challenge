@@ -4,8 +4,9 @@ import GoalCard from "./GoalCard"
 function GoalList({goals, onUpdateGoal, onDeleteGoal }) {
     return (
     <div className="goal-list">
-        {/* Loop through each goal and render a GoalCard */}
+       
       {goals.map((goal) => (
+
         <GoalCard
           key={goal.id}
           goal={goal}
@@ -13,6 +14,7 @@ function GoalList({goals, onUpdateGoal, onDeleteGoal }) {
           onDeleteGoal={onDeleteGoal}
         />
         ))}
+         {/* loop through each goal and render a GoalCard */}
     </div>
   );
         

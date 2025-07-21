@@ -31,7 +31,7 @@
       "id": "4",
       "name": "Down Payment - House",
       "targetAmount": 50000,
-      "savedAmount": 12000,
+      "savedAmount": 16000,
       "category": "Real Estate",
       "deadline": "2027-12-31",
       "createdAt": "2024-02-01"
@@ -49,7 +49,7 @@
       "id": "6",
       "name": "Education Fund",
       "targetAmount": 20000,
-      "savedAmount": 5000,
+      "savedAmount": 20000,
       "category": "Education",
       "deadline": "2028-01-01",
       "createdAt": "2024-04-20"
@@ -80,15 +80,6 @@
       "category": "Retirement",
       "deadline": "2035-01-01",
       "createdAt": "2023-01-01"
-    },
-    {
-      "id": "10",
-      "name": "Home Renovation",
-      "targetAmount": 7500,
-      "savedAmount": 1000,
-      "category": "Home",
-      "deadline": "2025-03-31",
-      "createdAt": "2024-05-15"
     },
     {
       "id": "86b769db-3f69-4852-9b95-13907982c89c",

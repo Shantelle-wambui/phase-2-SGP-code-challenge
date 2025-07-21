@@ -1,3 +1,7 @@
+## 🚀 Live Demo
+
+[Click here to view the live Smart Goal Planner](https://phase-2-sgp-challenge.netlify.app)
+
 # Smart Goal Planner
 
 A Smart Goal Planner for managing personal savings goals, making deposits, and tracking progress, powered by React and `json-server`.
